@@ -1,0 +1,6 @@
+# Exclude docker generated files
+docker/db-data
+docker/logs
+
+# Misc
+.history

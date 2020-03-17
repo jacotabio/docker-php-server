@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+
+    db:
+        image: mariadb:10.2.9
+        container_name: local_db
+        restart: always
+        ports:
+          - "3310:3306"
+        # expose:
+        #   - "3306"
+        volumes:
+          - ./docker/db-data:/var/lib/mysql
+          #- /etc/localtime:/etc/localtime
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - docker-local-network
+    
+    web:
+        build:
+            context: './docker'
+        container_name: local_web
+        restart: always
+        privileged: true
+        depends_on:
+            - db
+        ports:
+            - "80:80" # For HTTP
+            #- "7443:443" # For HTTPS
+        expose:
+            - "80"
+            #- "443"
+        volumes:
+            - ./source:/var/www/html
+            - ./docker/logs/apache2:/var/log/apache2
+            - ./docker/conf:/etc/apache2/sites-enabled
+            #- ./docker/certs:/usr/local/apache2/certs
+
+    phpmyadmin:
+        container_name: local_pma
+        depends_on:
+            - db
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - '8001:80'
+        environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - docker-local-network
+
+networks:
+  docker-local-network:
+# volumes:
+#   db_data:

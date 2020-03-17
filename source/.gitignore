@@ -1,0 +1,6 @@
+# Ignore all files from this 'app' folder
+/*
+
+# Except
+!.gitignore
+!/my-app/
