@@ -1,4 +1,4 @@
-<h1>Welcome to Docker PHP Server environment!</h1>
+<h1>Welcome to Docker PHP Server environment for Mac!</h1>
 
 by: John Carlo Octabio
 
