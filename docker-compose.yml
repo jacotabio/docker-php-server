@@ -12,6 +12,7 @@ services:
         #   - "3306"
         volumes:
           - ./docker/db-data:/var/lib/mysql
+          - ./files/db:/root/files/db
           #- /etc/localtime:/etc/localtime
         environment:
             MYSQL_ROOT_PASSWORD: password
@@ -37,6 +38,8 @@ services:
             - ./docker/logs/apache2:/var/log/apache2
             - ./docker/conf:/etc/apache2/sites-enabled
             #- ./docker/certs:/usr/local/apache2/certs
+        networks:
+            - docker-local-network
 
     phpmyadmin:
         container_name: local_pma

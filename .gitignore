@@ -1,6 +1,13 @@
 # Exclude docker generated files
-docker/db-data
-docker/logs
+/docker/db-data
+/docker/db-files/*
+/docker/logs
+
+# Configuration
+/docker/conf/vhosts.conf
+
+# Exclude
+.DS_Store
 
 # Misc
 .history
